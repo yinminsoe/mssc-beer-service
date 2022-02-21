@@ -1,2 +1,2 @@
 # mssc-beer-service
-Mssc Beer Service
+Spring Boot Mssc Beer Service Example
