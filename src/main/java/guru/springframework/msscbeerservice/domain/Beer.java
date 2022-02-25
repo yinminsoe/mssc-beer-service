@@ -10,6 +10,7 @@ import org.springframework.stereotype.Component;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
+import java.sql.Timestamp;
 import java.time.OffsetDateTime;
 import java.util.UUID;
 
@@ -32,10 +33,10 @@ public class Beer {
 
     @CreationTimestamp
     @Column(updatable = false)
-    private OffsetDateTime createdDate;
+    private Timestamp createdDate;
 
     @UpdateTimestamp
-    private OffsetDateTime lastModifiedDate;
+    private Timestamp lastModifiedDate;
 
 
     private String beerName;
