@@ -24,6 +24,7 @@ import java.util.UUID;
 @WebMvcTest(BeerController.class)
 class BeerControllerTest {
     public static final String API_V_1_BEER = "/api/v1/beer";
+    public static final String BEER_1_UPC = "0631234200036";
 
     @MockBean
     private BeerService beerService;
@@ -67,6 +68,6 @@ class BeerControllerTest {
         mockMvc.perform(put(API_V_1_BEER+"/"+UUID.randomUUID()).contentType(MediaType.APPLICATION_JSON).content(beerDtoJsonString))
                 .andExpect(status().isNoContent());
     }
-    public BeerDto getBeerDto(){return BeerDto.builder().beerName("New Beer ").id(null).upc(25L).beerStyle(BeerStyleEnum.IPA).price(BigDecimal.valueOf(3.50)).build();}
+    public BeerDto getBeerDto(){return BeerDto.builder().beerName("New Beer ").id(null).upc(BEER_1_UPC).beerStyle(BeerStyleEnum.IPA).price(BigDecimal.valueOf(3.50)).build();}
 
 }
