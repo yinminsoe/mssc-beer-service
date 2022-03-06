@@ -1,4 +1,4 @@
-package guru.springframework.msscbeerservice.web.controller;
+package guru.springframework.msscbeerservice.web.controllers;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.validation.BindException;

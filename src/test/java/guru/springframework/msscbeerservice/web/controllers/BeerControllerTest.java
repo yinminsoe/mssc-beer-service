@@ -1,4 +1,4 @@
-package guru.springframework.msscbeerservice.web.controller;
+package guru.springframework.msscbeerservice.web.controllers;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -13,6 +13,8 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyBoolean;
 import static org.mockito.BDDMockito.given;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
@@ -48,8 +50,8 @@ class BeerControllerTest {
     @Test
     void getBeerById() throws Exception {
         UUID  id = UUID.randomUUID();
-        given(beerService.getBeerById(id)).willReturn(beerDto);
-        mockMvc.perform(get(API_V_1_BEER+"/"+id))
+        given(beerService.getBeerById(any(), anyBoolean())).willReturn(beerDto);
+        mockMvc.perform(get(API_V_1_BEER+"/"+id.toString()))
                 .andExpect(status().isOk());
 
     }
@@ -68,6 +70,12 @@ class BeerControllerTest {
         mockMvc.perform(put(API_V_1_BEER+"/"+UUID.randomUUID()).contentType(MediaType.APPLICATION_JSON).content(beerDtoJsonString))
                 .andExpect(status().isNoContent());
     }
-    public BeerDto getBeerDto(){return BeerDto.builder().beerName("New Beer ").id(null).upc(BEER_1_UPC).beerStyle(BeerStyleEnum.IPA).price(BigDecimal.valueOf(3.50)).build();}
+    public BeerDto getBeerDto(){
+        return BeerDto.builder().beerName("New Beer ")
+                .upc(BEER_1_UPC)
+                .beerStyle(BeerStyleEnum.IPA)
+                .price(BigDecimal.valueOf(3.50)).build();
+
+    }
 
 }
