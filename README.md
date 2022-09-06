@@ -1,2 +1,2 @@
-# mssc-beer-service
-Micro Beer Service
+# MSSC Beer Service
+Beer Service of Micro Service Course
