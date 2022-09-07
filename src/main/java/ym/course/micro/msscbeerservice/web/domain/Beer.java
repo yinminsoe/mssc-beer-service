@@ -28,6 +28,7 @@ public class Beer {
     private Long version;
 
     @CreationTimestamp
+    @Column(updatable = false)
     private Timestamp createdDate;
 
     @UpdateTimestamp
