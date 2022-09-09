@@ -14,7 +14,7 @@
 	<name>mssc-beer-service</name>
 	<description>Beer Service of Micro</description>
 	<properties>
-		<java.version>11</java.version>
+		<java.version>17</java.version>
 		<jaxb-api.version>2.3.1</jaxb-api.version>
 		<org.mapstruct.version>1.5.2.Final</org.mapstruct.version>
 		<source.version>${java.version}</source.version>
