@@ -10,6 +10,7 @@ import org.springframework.test.web.servlet.MockMvc;
 import ym.course.micro.msscbeerservice.web.model.BeerDto;
 import ym.course.micro.msscbeerservice.web.model.BeerStyleEnum;
 
+import java.math.BigDecimal;
 import java.util.UUID;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -27,9 +28,10 @@ class BeerControllerTest {
     @BeforeEach
     void setUp() {
         beerDto= BeerDto.builder()
-                .id(UUID.randomUUID())
                 .beerName("Beer Name")
                 .beerStyle(BeerStyleEnum.IPA)
+                .upc(123)
+                .price(BigDecimal.valueOf(12.85))
                 .build();
     }
     @Test
