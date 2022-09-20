@@ -31,7 +31,7 @@ public class BeerServiceImpl implements BeerService {
         beer.setBeerName(beerDto.getBeerName());
         beer.setBeerStyle(beerDto.getBeerStyle().toString());
         beer.setPrice(beerDto.getPrice());
-        beer.setUpc(Long.valueOf(beerDto.getUpc()));
+        beer.setUpc(beerDto.getUpc());
 
         return beerMapper.beerToBeerDto(beerRepository.save(beer));
     }
