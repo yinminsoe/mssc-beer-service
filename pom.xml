@@ -98,6 +98,7 @@
 			<plugin>
 				 <groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
+				<version>${maven-compiler-plugin.version}</version>
 				<configuration>
 					<source>${source.version}</source>
 					<target>${target.version}</target>
@@ -119,7 +120,9 @@
 						</path>
 					</annotationProcessorPaths>
 					<compilerArgs>
-						<compilerArg>-AmapstructDefaultComponentModel=spring</compilerArg>
+						<compilerArg>
+							-Amapstruct.defaultComponentModel=spring
+						</compilerArg>
 					</compilerArgs>
 				</configuration>
 			</plugin>
