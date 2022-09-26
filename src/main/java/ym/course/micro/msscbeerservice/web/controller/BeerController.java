@@ -30,20 +30,29 @@ public class BeerController {
             @RequestParam(value = "pageNumber", required=false) Integer pageNumber,
             @RequestParam(value = "pageSize", required = false) Integer pageSize,
             @RequestParam(value = "beerName", required = false) String beerName,
-            @RequestParam(value = "beerStyle",required = false) String beerStyle){
+            @RequestParam(value = "beerStyle",required = false) String beerStyle,
+            @RequestParam(value="", required = false) Boolean showInventoryOnhand
+    ){
+        if(showInventoryOnhand == null){
+            showInventoryOnhand=false;
+        }
         if(pageNumber == null || pageNumber < 0){
             pageNumber=DEFAULT_PAGE_NUMBER;
         }
         if(pageSize == null || pageSize < 0){
             pageSize = DEFAULT_PAGE_SIZE;
         }
-        BeerPageList beerPageList=beerService.listBeer(beerName, beerStyle, PageRequest.of(pageNumber, pageSize));
+        BeerPageList beerPageList=beerService.listBeer(beerName, beerStyle, PageRequest.of(pageNumber, pageSize),showInventoryOnhand);
         return new ResponseEntity<>(beerPageList, HttpStatus.OK);
     }
     @GetMapping(value = {"/{beerId}"})
-    public ResponseEntity<BeerDto> getBeerById(@PathVariable("beerId") UUID beerId){
-        //to do impl
-        BeerDto beerDto= beerService.getBeerById(beerId);
+    public ResponseEntity<BeerDto> getBeerById(
+            @PathVariable("beerId") UUID beerId,
+            @RequestParam(value = "showInventoryOnhand", required = false)Boolean showInventoryOnhand){
+        if(showInventoryOnhand == null){
+            showInventoryOnhand=false;
+        }
+        BeerDto beerDto= beerService.getBeerById(beerId,showInventoryOnhand);
         return new ResponseEntity<>(beerDto, HttpStatus.OK);
     }
 
