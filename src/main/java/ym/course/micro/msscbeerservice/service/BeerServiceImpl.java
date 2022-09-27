@@ -1,6 +1,7 @@
 package ym.course.micro.msscbeerservice.service;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
@@ -22,7 +23,9 @@ public class BeerServiceImpl implements BeerService {
     private final BeerRepository beerRepository;
     private final BeerMapper beerMapper;
     @Override
+    @Cacheable(value = "beerCache", key = "#beerId" , condition = "#showInventoryOnhand == false")
     public BeerDto getBeerById(UUID beerId,Boolean showInventoryOnhand) {
+        System.out.println("called getBeerById");
         Optional<Beer> beer= beerRepository.findById(beerId);
         if(showInventoryOnhand){
             return beerMapper.beerToBeerDtoWithInventory(beer.orElseThrow(NotFoundException::new));
@@ -48,9 +51,11 @@ public class BeerServiceImpl implements BeerService {
         return beerMapper.beerToBeerDto(beerRepository.save(beer));
     }
 
+    @Cacheable( value = "beerListCache", condition = "#showInventoryOnhand == false")
     @Override
     public BeerPageList listBeer(String beerName, String beerStyle, PageRequest pageRequest,Boolean showInventoryOnhand) {
         BeerPageList beerPageList;
+        System.out.println("called listBeers");
         Page<Beer> beerPage;
             if(StringUtils.hasLength(beerName) && StringUtils.hasLength(beerStyle)){
                 beerPage=beerRepository.findAllByBeerNameAndBeerStyle(beerName, beerStyle, pageRequest);

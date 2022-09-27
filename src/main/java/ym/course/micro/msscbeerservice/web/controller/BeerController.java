@@ -1,6 +1,7 @@
 package ym.course.micro.msscbeerservice.web.controller;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -33,6 +34,7 @@ public class BeerController {
             @RequestParam(value = "beerStyle",required = false) String beerStyle,
             @RequestParam(value="", required = false) Boolean showInventoryOnhand
     ){
+
         if(showInventoryOnhand == null){
             showInventoryOnhand=false;
         }
@@ -46,6 +48,7 @@ public class BeerController {
         return new ResponseEntity<>(beerPageList, HttpStatus.OK);
     }
     @GetMapping(value = {"/{beerId}"})
+
     public ResponseEntity<BeerDto> getBeerById(
             @PathVariable("beerId") UUID beerId,
             @RequestParam(value = "showInventoryOnhand", required = false)Boolean showInventoryOnhand){
