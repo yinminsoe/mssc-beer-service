@@ -1,5 +1,6 @@
 package ym.course.micro.msscbeerservice.service.inventory;
 
+import org.junit.Ignore;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,9 +22,11 @@ class BeerInventoryServiceRestTemplateImplTest {
 
     }
 
-    @Test
+
+    @Ignore
+  //  @Test
     void getOnhandInventory() {
      Integer onHand= beerInventoryService.getOnhandInventory(BeerLoader.BEER_1_UUID);
-        System.out.println("onHand ::"+onHand);
+       System.out.println("onHand ::"+onHand);
     }
 }
